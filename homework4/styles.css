@@ -1,0 +1,449 @@
+/* remove default margins + padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+}
+
+
+/* sets up main grid layout */
+.grid-container {
+    display: grid;
+    /* sidebar + main content width*/
+    grid-template-columns: 200px 1fr; 
+
+    /* header + content + footer height*/
+    grid-template-rows: 100px 1fr 50px; 
+    grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+    min-height: 100vh;
+}
+
+/* header */
+.header {
+    grid-area: header;
+    background-color: #ffc936;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+/* sidebar areaaa */
+.sidebar {
+    grid-area: sidebar;
+    background-color: #f4f4f4;
+    padding: 10px;
+    overflow-y: auto;
+
+    /* flexbox area, create the flexbox!! */
+    display: flex;
+    
+    /* items start at the top */
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+/* removes bullets */
+.sidebar ul {
+    list-style: none;
+
+    /* flexbox area part 2, stack items vertically */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* space between items */
+.sidebar li {
+    margin-bottom: 10px;
+}
+
+
+/* removes underline, sets link color */
+.sidebar a {
+    text-decoration: none;
+    color: #000000;
+}
+
+/* main categories */
+.main-content {
+    grid-area: main;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #fff;
+}
+
+/* footer area */
+.footer {
+    grid-area: footer;
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* the tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+/* padding borders, align them left */
+th, td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #333;
+}
+
+/* considers if it's scrollable */
+.main-content {
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+}
+
+
+
+/* add summary sections, IMPORTANT AREA!!!! */
+
+#summary {
+    /* background area */
+    background-color: #fff9e6; 
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 5px solid #ffc936; 
+}
+
+#summary h2 {
+    font-size: 1.8rem;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+#summary p {
+    font-size: 1rem;
+    color: #555555;
+    line-height: 1.6;
+}
+
+
+/* !!!! education section !!! */
+
+#education {
+    /* lighter green background for boxes */
+    background-color: #cdffd1; 
+    padding: 20px;
+    margin-bottom: 20px;
+    
+    /* header color for boxes */
+    border-left: 5px solid #00572d;
+}
+
+#education h3 {
+    font-size: 1.6rem;
+    color: #333333;
+    margin-bottom: 15px;
+}
+
+#education table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#education th {
+    background-color: #003402;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+#education td {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+
+
+/* !!! projects section !!! */
+
+#projects {
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    grid-gap: 20px; 
+    padding: 20px;
+}
+
+/* heading spans all of the columns */
+#projects h2 {
+    grid-column: 1 / -1; 
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#projects figcaption {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+
+
+/* !!! Footer combo into contact info! */
+
+.footer {
+    /* contains the positioning for all it affects */
+    position: relative; 
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+    /* each link on it's own line */
+    display: block; 
+    /* space between lines */
+    margin: 3px 0;  
+}
+
+/* sets in the bottom left of the footer*/
+.footer section {
+    position: relative; 
+    bottom: 10px;
+    text-align: center;
+}
+
+.footer section a {
+    /* makes links or the text next to one another */
+    display: inline-block;  
+    margin: 0 10px;         
+    color: #ffffff;
+    text-decoration: none;
+    /* make text smaller */
+    font-size: 0.9rem;       
+}
+
+
+
+
+/* !!!!!!!!!!!!!!! different sizes for different screen sizes */
+
+/* <= 480px, phones*/
+@media (max-width: 480px) 
+{
+
+    /* stack layout vertically */
+    .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr auto;
+        grid-template-areas:
+            "header"
+            "sidebar"
+            "main"
+            "footer";
+    }
+
+    /* sidebar becomes top nav */
+    .sidebar {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .sidebar ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    /* smaller headings */
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    /* project images scale */
+    #projects img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* reduce padding for small screens */
+    .main-content,
+    #summary,
+    #education,
+    #projects {
+        padding: 10px;
+    }
+}
+
+
+
+/* <= 768px, tablets */
+@media (max-width: 768px) 
+{
+
+    .grid-container {
+        grid-template-columns: 160px 1fr;
+    }
+
+    .sidebar ul {
+        gap: 8px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    #projects {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* <= 1024px, desktop */
+@media (max-width: 1024px) 
+{
+
+    .grid-container {
+        grid-template-columns: 180px 1fr;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+}
+
+
+/* skills section */
+#skills 
+{
+    background-color: #cdffd1;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 5px solid #00572d;
+}
+
+#skills ul ul 
+{
+    list-style: none;
+    padding-left: 10px;
+}
+
+/* individual items */
+#skills ul ul li 
+{
+    background-color: #ffffff;
+    margin: 8px 0;
+    padding: 8px 12px;
+    border-radius: 6px;
+
+    /* my cool transition */
+    transition: 
+        transform 0.3s ease,
+        background-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* hover interaction */
+#skills ul ul li:hover 
+{
+    transform: rotate(-2deg);
+
+    background-color: #70ff7c;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+
+/* !!!!!!!!!!!!!!!!!!! project image area */
+
+/* float project images so they align horizontally */
+#projects figure 
+{
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+/* clear floats after projects section */
+#projects::after 
+{
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/* smooth hover transition for images */
+#projects img 
+{
+    transition: opacity 0.3s ease;
+}
+
+/* hover effect */
+#projects img:hover 
+{
+    opacity: 0.7;
+}
+
+
+
+/* set header to stick with user through the page */
+.header {
+    position: sticky;
+    top: 0;
+    /* 9999 because i think its funny */
+    z-index: 9999;
+}
+
+
+
+/* resume button changes */
+#contact a[download] 
+{
+    display: inline-block;
+    background-color: #ffc936;
+    color: #000000;
+    padding: 10px 16px;
+    margin-top: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+
+    /* smooth transitions */
+    transition:
+        background-color 0.3s ease,
+        border-radius 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+#contact a[download]:hover 
+{
+    background-color: #ffb703;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
